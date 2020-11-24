@@ -26,7 +26,6 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
 gem 'rails-i18n', '~> 6.0.0'
 gem 'active_model_serializers', '~> 0.10.0'
-gem 'foreman'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

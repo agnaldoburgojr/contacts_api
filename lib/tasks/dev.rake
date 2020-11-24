@@ -1,8 +1,10 @@
 namespace :dev do
   desc "Config development environment"
   task setup: :environment do
+    p 'Reset database'
+    %x(rails db:drop db:create db:migrate)
+
     p 'Add kinds...'
-    
     kinds = %w(Amigo Comercial Conhecido)
 
     kinds.each do |kind|
@@ -32,7 +34,12 @@ namespace :dev do
         contact.save!
       end
     end
-    p 'Phones added'   
-  end
+    p 'Phones added'
 
+    p 'Add addresses'
+    Contact.all.each do |contact|
+      Address.create(street: Faker::Address.street_address, city: Faker::Address.city, contact: contact )
+    end
+    p 'Addresses added'   
+  end
 end

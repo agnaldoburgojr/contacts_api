@@ -1,5 +1,6 @@
 class Contact < ApplicationRecord
   belongs_to :kind, optional: true
+  has_many :phones
 
   def birthdate_br
     I18n.l(self.birthdate) unless self.birthdate.blank?
@@ -18,4 +19,10 @@ class Contact < ApplicationRecord
   #     include: { kind: { only: :description} }
   #   )
   # end
+
+  def as_json(options={})
+    h = super(options)
+    h[:birthdate] = I18n.l(self.birthdate) unless self.birthdate.blank?
+    h
+  end
 end
